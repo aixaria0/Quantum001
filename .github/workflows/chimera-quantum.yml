@@ -41,10 +41,24 @@ jobs:
         run: python -m chimera_quantum.cli --measure --workspace /tmp/chimera-quantum-demo
       - name: Produce tamper-evident evidence artifact
         run: python run_quantum_evidence.py --out artifacts/chimera-quantum/evidence.json
+      - name: Run full signed two-verifier elevator lane
+        run: python -m chimera_quantum.elevator --workspace artifacts/chimera-elevator --seed 42
       - name: Verify Braket one-line backend dry run without AWS credentials
         run: BRAKET_BACKEND=sv1 python run_braket_job.py --dry-run
-      - name: Upload evidence artifact
+      - name: Upload quantum evidence artifact
         uses: actions/upload-artifact@v4
         with:
           name: chimera-quantum-evidence
           path: artifacts/chimera-quantum/evidence.json
+      - name: Upload signed elevator certificate bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: chimera-quantum-elevator
+          path: |
+            artifacts/chimera-elevator/evidence.json
+            artifacts/chimera-elevator/execution-receipt.json
+            artifacts/chimera-elevator/omega-envelope.json
+            artifacts/chimera-elevator/assurance-package.json
+            artifacts/chimera-elevator/verifier-a.json
+            artifacts/chimera-elevator/verifier-b.json
+            artifacts/chimera-elevator/final-certificate.json
