@@ -11,6 +11,7 @@ on:
       - 'requirements-chimera-quantum.txt'
       - 'requirements-braket.txt'
       - 'run_braket_job.py'
+      - 'run_quantum_evidence.py'
       - '.github/workflows/chimera-quantum.yml'
   pull_request:
     paths:
@@ -20,6 +21,7 @@ on:
       - 'requirements-chimera-quantum.txt'
       - 'requirements-braket.txt'
       - 'run_braket_job.py'
+      - 'run_quantum_evidence.py'
 
 jobs:
   test:
@@ -37,5 +39,12 @@ jobs:
         run: python -m pytest tests/test_chimera_*.py tests/test_braket_config.py -q
       - name: Run replay demo
         run: python -m chimera_quantum.cli --measure --workspace /tmp/chimera-quantum-demo
+      - name: Produce tamper-evident evidence artifact
+        run: python run_quantum_evidence.py --out artifacts/chimera-quantum/evidence.json
       - name: Verify Braket one-line backend dry run without AWS credentials
         run: BRAKET_BACKEND=sv1 python run_braket_job.py --dry-run
+      - name: Upload evidence artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: chimera-quantum-evidence
+          path: artifacts/chimera-quantum/evidence.json
