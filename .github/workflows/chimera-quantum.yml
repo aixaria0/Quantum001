@@ -6,13 +6,13 @@ on:
       - chimera-quantum-execution-v1
     paths:
       - 'chimera_quantum/**'
-      - 'tests/test_chimera_quantum.py'
+      - 'tests/test_chimera_*.py'
       - 'requirements-chimera-quantum.txt'
       - '.github/workflows/chimera-quantum.yml'
   pull_request:
     paths:
       - 'chimera_quantum/**'
-      - 'tests/test_chimera_quantum.py'
+      - 'tests/test_chimera_*.py'
       - 'requirements-chimera-quantum.txt'
 
 jobs:
@@ -28,6 +28,6 @@ jobs:
       - name: Install dependencies
         run: python -m pip install -r requirements-chimera-quantum.txt
       - name: Run quantum-core tests
-        run: python -m pytest tests/test_chimera_quantum.py -q
+        run: python -m pytest tests/test_chimera_*.py -q
       - name: Run replay demo
         run: python -m chimera_quantum.cli --measure --workspace /tmp/chimera-quantum-demo
