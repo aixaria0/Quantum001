@@ -1,0 +1,33 @@
+name: Chimera Quantum Core
+
+on:
+  push:
+    branches:
+      - chimera-quantum-execution-v1
+    paths:
+      - 'chimera_quantum/**'
+      - 'tests/test_chimera_quantum.py'
+      - 'requirements-chimera-quantum.txt'
+      - '.github/workflows/chimera-quantum.yml'
+  pull_request:
+    paths:
+      - 'chimera_quantum/**'
+      - 'tests/test_chimera_quantum.py'
+      - 'requirements-chimera-quantum.txt'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-chimera-quantum.txt
+      - name: Install dependencies
+        run: python -m pip install -r requirements-chimera-quantum.txt
+      - name: Run quantum-core tests
+        run: python -m pytest tests/test_chimera_quantum.py -q
+      - name: Run replay demo
+        run: python -m chimera_quantum.cli --measure --workspace /tmp/chimera-quantum-demo
