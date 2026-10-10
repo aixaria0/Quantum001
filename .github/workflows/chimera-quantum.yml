@@ -7,13 +7,19 @@ on:
     paths:
       - 'chimera_quantum/**'
       - 'tests/test_chimera_*.py'
+      - 'tests/test_braket_config.py'
       - 'requirements-chimera-quantum.txt'
+      - 'requirements-braket.txt'
+      - 'run_braket_job.py'
       - '.github/workflows/chimera-quantum.yml'
   pull_request:
     paths:
       - 'chimera_quantum/**'
       - 'tests/test_chimera_*.py'
+      - 'tests/test_braket_config.py'
       - 'requirements-chimera-quantum.txt'
+      - 'requirements-braket.txt'
+      - 'run_braket_job.py'
 
 jobs:
   test:
@@ -25,9 +31,11 @@ jobs:
           python-version: '3.12'
           cache: pip
           cache-dependency-path: requirements-chimera-quantum.txt
-      - name: Install dependencies
+      - name: Install core dependencies
         run: python -m pip install -r requirements-chimera-quantum.txt
-      - name: Run quantum-core tests
-        run: python -m pytest tests/test_chimera_*.py -q
+      - name: Run quantum-core and backend-contract tests
+        run: python -m pytest tests/test_chimera_*.py tests/test_braket_config.py -q
       - name: Run replay demo
         run: python -m chimera_quantum.cli --measure --workspace /tmp/chimera-quantum-demo
+      - name: Verify Braket one-line backend dry run without AWS credentials
+        run: BRAKET_BACKEND=sv1 python run_braket_job.py --dry-run
