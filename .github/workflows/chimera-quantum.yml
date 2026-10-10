@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - chimera-quantum-execution-v1
+      - cxp-v1-export
     paths:
       - 'chimera_quantum/**'
       - 'tests/test_chimera_*.py'
@@ -12,6 +13,7 @@ on:
       - 'requirements-braket.txt'
       - 'run_braket_job.py'
       - 'run_quantum_evidence.py'
+      - 'run_cxp_export.py'
       - '.github/workflows/chimera-quantum.yml'
   pull_request:
     paths:
@@ -22,6 +24,7 @@ on:
       - 'requirements-braket.txt'
       - 'run_braket_job.py'
       - 'run_quantum_evidence.py'
+      - 'run_cxp_export.py'
 
 jobs:
   test:
@@ -43,6 +46,8 @@ jobs:
         run: python run_quantum_evidence.py --out artifacts/chimera-quantum/evidence.json
       - name: Run full signed two-verifier elevator lane
         run: python -m chimera_quantum.elevator --workspace artifacts/chimera-elevator --seed 42
+      - name: Export CXP chimera-run v2
+        run: python run_cxp_export.py --workspace artifacts/chimera-elevator --output artifacts/chimera-elevator/chimera-run-v2.json
       - name: Verify Braket one-line backend dry run without AWS credentials
         run: BRAKET_BACKEND=sv1 python run_braket_job.py --dry-run
       - name: Upload quantum evidence artifact
@@ -50,10 +55,10 @@ jobs:
         with:
           name: chimera-quantum-evidence
           path: artifacts/chimera-quantum/evidence.json
-      - name: Upload signed elevator certificate bundle
+      - name: Upload signed elevator and CXP bundle
         uses: actions/upload-artifact@v4
         with:
-          name: chimera-quantum-elevator
+          name: chimera-quantum-cxp
           path: |
             artifacts/chimera-elevator/evidence.json
             artifacts/chimera-elevator/execution-receipt.json
@@ -62,3 +67,4 @@ jobs:
             artifacts/chimera-elevator/verifier-a.json
             artifacts/chimera-elevator/verifier-b.json
             artifacts/chimera-elevator/final-certificate.json
+            artifacts/chimera-elevator/chimera-run-v2.json
