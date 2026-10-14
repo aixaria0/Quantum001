@@ -4,7 +4,7 @@ A standalone, bilingual quantum computing studio for [aixaria0/Quantum001](https
 
 Studio: https://aixaria0.github.io/Quantum001/ (public GitHub Pages deployment).
 
-The `Quantum Studio` GitHub Actions workflow validates every website change and publishes `website/dist` after successful checks on `main`. The repository's Pages source is configured as **GitHub Actions**. Relative asset URLs and hash-based navigation support the `/Quantum001/` project path without a build step.
+The `Quantum Studio` GitHub Actions workflow validates every website change and synchronizes `website/dist` to the generated `gh-pages` branch after successful checks on `main`. It then explicitly requests a Pages build, because pushes made with `GITHUB_TOKEN` do not trigger one automatically. The repository's Pages source is **Deploy from a branch → gh-pages → / (root)**. Relative asset URLs and hash-based navigation support the `/Quantum001/` project path without a build step.
 
 ## Experience
 
