@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101110">
+  <meta name="description" content="Quantum001 is a hands-on quantum studio. Explore 12 research labs, compose quantum circuits, and inspect your experiments. All in your browser.">
+  <meta property="og:title" content="Quantum001 — A little uncertainty. Endless possibility.">
+  <meta property="og:description" content="A hands-on studio for quantum ideas. Twelve research labs. One curious mind.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://quantum001-lattice.ariaaix.chatgpt.site/assets/social-card.png">
+  <title>Quantum001 — The Quantum Studio</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="preload" href="./assets/manrope.ttf" as="font" type="font/ttf" crossorigin>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="mobile-shade" id="mobile-shade"></div>
+  <aside class="sidebar" id="sidebar" aria-label="Main navigation"></aside>
+  <div class="app-shell">
+    <header class="topbar" id="topbar"></header>
+    <main id="main" tabindex="-1"><div class="loading-state">Preparing your quantum studio…</div></main>
+    <footer id="footer"></footer>
+  </div>
+  <dialog id="search-dialog" class="search-dialog" aria-labelledby="search-heading">
+    <div class="search-box"><span id="search-heading" class="sr-only">Search the studio</span><span class="search-icon">⌕</span><input id="global-search" aria-label="Find a lab" placeholder="Find a lab, an idea, an experiment…" autocomplete="off"><button class="key" id="close-search" aria-label="Close search">Esc</button></div>
+    <div id="search-results" class="search-results"></div>
+    <div class="search-hint">↑ ↓ to navigate <span>↵ to explore</span></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./app.mjs"></script>
+  <noscript><div class="noscript">Quantum001 runs its experiments in your browser. Enable JavaScript to open the studio.</div></noscript>
+</body>
+</html>

@@ -1,0 +1,30 @@
+name: Quantum Studio
+
+on:
+  pull_request:
+    paths:
+      - 'website/**'
+      - '.github/workflows/quantum-studio.yml'
+  push:
+    paths:
+      - 'website/**'
+      - '.github/workflows/quantum-studio.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Numerical engine and static integrity
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify algorithms, sampling, training and evidence
+        run: npm --prefix website test
+      - name: Check syntax and self-hosted assets
+        run: npm --prefix website run check
