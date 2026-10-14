@@ -36,23 +36,34 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
-      contents: read
+      contents: write
       pages: write
-      id-token: write
     concurrency:
       group: github-pages
       cancel-in-progress: false
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: https://aixaria0.github.io/Quantum001/
     steps:
       - uses: actions/checkout@v4
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-      - name: Upload the standalone studio
-        uses: actions/upload-pages-artifact@v4
         with:
-          path: website/dist
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          fetch-depth: 0
+      - name: Update the generated gh-pages branch
+        env:
+          PAGES_DIR: ${{ runner.temp }}/quantum001-pages
+        run: |
+          git fetch origin gh-pages
+          git worktree add --detach "$PAGES_DIR" origin/gh-pages
+          rsync -a --delete --exclude=.git website/dist/ "$PAGES_DIR/"
+          touch "$PAGES_DIR/.nojekyll"
+          git -C "$PAGES_DIR" config user.name 'github-actions[bot]'
+          git -C "$PAGES_DIR" config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git -C "$PAGES_DIR" add --all
+          if ! git -C "$PAGES_DIR" diff --cached --quiet; then
+            git -C "$PAGES_DIR" commit -m "Publish Quantum Studio $GITHUB_SHA"
+            git -C "$PAGES_DIR" push origin HEAD:gh-pages
+          fi
+      - name: Request the public Pages build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"
