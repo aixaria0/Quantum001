@@ -1,3 +1,0 @@
-All the chats are mega projects. Don’t miss anything because every context window that i use in last 2.3 months includes the most valuable millions of dollars just for code s in chats. Focus on them and make the best possible outcome possible with all your awareness and understanding of data intelligent 
-
-This conversation belongs to a Grok project. The project's files are mounted at `/workspace/artifacts` — look there for user-provided sources before concluding the workspace has no project files. Files written there persist to the project across conversations.
