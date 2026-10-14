@@ -2,7 +2,7 @@
 
 An interactive quantum computing research project by AIX Aria.
 
-**[Open the Quantum Studio](https://quantum001-lattice.ariaaix.chatgpt.site)** — owner-private hosted edition, with English/Persian navigation, twelve research labs, a twelve-qubit circuit composer, and inspectable local experiment records.
+**[Open the Quantum Studio](https://aixaria0.github.io/Quantum001/)** — public on GitHub Pages, with English/Persian navigation, twelve research labs, a twelve-qubit circuit composer, and inspectable local experiment records.
 
 The standalone website lives in [`website/`](website/README.md). Its static files have no installation or build step. The existing TanStack application under `src/` is preserved.
 

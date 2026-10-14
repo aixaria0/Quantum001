@@ -2,7 +2,9 @@
 
 A standalone, bilingual quantum computing studio for [aixaria0/Quantum001](https://github.com/aixaria0/Quantum001), built from the original twelve-lab collection and the supplied CHIMERA workspace.
 
-Studio: https://quantum001-lattice.ariaaix.chatgpt.site (owner-private deployment).
+Studio: https://aixaria0.github.io/Quantum001/ (public GitHub Pages deployment).
+
+The `Quantum Studio` GitHub Actions workflow validates every website change and publishes `website/dist` after successful checks on `main`. The repository's Pages source is configured as **GitHub Actions**. Relative asset URLs and hash-based navigation support the `/Quantum001/` project path without a build step.
 
 ## Experience
 
