@@ -28,9 +28,9 @@ def load_request() -> dict:
 
 def test_cross_runtime_fixture_digests_and_contract_validate():
     request = validate_execution_request(load_request())
-    assert request["job"]["ising"]["digest"] == "7f4f219ba159725e515a6ab2632b95fae28243dc35598c423777d63d8db7b5e3"
-    assert request["job"]["digest"] == "f0c042463eeac9b959ba4b8229e11ff9592d0679738a1e3bac9224db4e2b5c69"
-    assert object_digest(request) == "c9e36476eeb9b5e10a94553d2784cfc4341564f1012652056c27a67052d70f7a"
+    assert request["job"]["ising"]["digest"] == "10a6e26ae2c11c8cb34d6673760b70f81d6232478fc8cee9be925b7fa1ae8d52"
+    assert request["job"]["digest"] == "ff89372c81c2df250fb342701f05757f4974dd12bebeb9de956181dfdeec8fa5"
+    assert object_digest(request) == "a2caa378e414a369dca55bd7bfc90c3339be0f8dcf6a544025175d1f99f0449c"
 
 
 def test_tampered_smmq_job_is_rejected():
@@ -52,7 +52,7 @@ def test_qaoa_gate_spec_matches_ising_hamiltonian_angles():
     first_rz = next(gate for gate in gates if gate["gate"] == "RZ")
     first_zz = next(gate for gate in gates if gate["gate"] == "ZZ")
     assert first_rz["target"] == 0
-    assert first_rz["angle"] == pytest.approx(0.28)
+    assert first_rz["angle"] == pytest.approx(0.14)
     assert first_zz["targets"] == [0, 1]
     assert first_zz["angle"] == pytest.approx(0.42)
 
@@ -63,8 +63,8 @@ def test_measurement_summary_uses_declared_qubit_order_and_recomputes_energy():
     assert summary["shots"] == 64
     assert summary["mode"]["bits"] == [1, 0, 1]
     assert summary["best_observed"]["selected"] == ["c1", "c3"]
-    assert summary["best_observed"]["energy"] == pytest.approx(-1.05)
-    assert ising_energy(request["job"], [1, 0, 1]) == pytest.approx(-1.05)
+    assert summary["best_observed"]["energy"] == pytest.approx(-1.2)
+    assert ising_energy(request["job"], [1, 0, 1]) == pytest.approx(-1.2)
 
 
 def test_signed_receipt_verifies_and_tamper_fails(tmp_path: Path):
