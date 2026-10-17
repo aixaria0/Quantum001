@@ -1,0 +1,38 @@
+{
+  "schema": "smm-q/execution-request-v1",
+  "job": {
+    "schema": "smm-q/epistemic-job-v1",
+    "graphDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+    "quboDigest": "2222222222222222222222222222222222222222222222222222222222222222",
+    "ising": {
+      "schema": "smm-q/ising-v1",
+      "offset": -0.25,
+      "h": [0.2, -0.4, 0.1],
+      "couplings": [
+        {"i": 0, "j": 1, "value": 0.3},
+        {"i": 1, "j": 2, "value": -0.2}
+      ],
+      "variables": [
+        {"index": 0, "claimId": "c1", "utility": 0.8},
+        {"index": 1, "claimId": "c2", "utility": 0.7},
+        {"index": 2, "claimId": "c3", "utility": 0.5}
+      ],
+      "digest": "7f4f219ba159725e515a6ab2632b95fae28243dc35598c423777d63d8db7b5e3"
+    },
+    "semantics": "selected bit = claim admitted to synthesis candidate set",
+    "authority": {
+      "physicalQpuExecution": "UNKNOWN",
+      "externalTruth": "UNKNOWN"
+    },
+    "digest": "f0c042463eeac9b959ba4b8229e11ff9592d0679738a1e3bac9224db4e2b5c69"
+  },
+  "parameters": {
+    "gammas": [0.7, 1.1],
+    "betas": [0.3, 0.2]
+  },
+  "shots": 64,
+  "source": {
+    "system": "smm",
+    "traceId": "fixture"
+  }
+}
