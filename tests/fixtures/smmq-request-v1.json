@@ -6,25 +6,25 @@
     "quboDigest": "2222222222222222222222222222222222222222222222222222222222222222",
     "ising": {
       "schema": "smm-q/ising-v1",
-      "offset": -0.25,
-      "h": [0.2, -0.4, 0.1],
+      "offset": -0.7249999999999999,
+      "h": [0.10000000000000003, 0.125, 0.325],
       "couplings": [
         {"i": 0, "j": 1, "value": 0.3},
-        {"i": 1, "j": 2, "value": -0.2}
+        {"i": 1, "j": 2, "value": -0.125}
       ],
       "variables": [
         {"index": 0, "claimId": "c1", "utility": 0.8},
         {"index": 1, "claimId": "c2", "utility": 0.7},
         {"index": 2, "claimId": "c3", "utility": 0.5}
       ],
-      "digest": "7f4f219ba159725e515a6ab2632b95fae28243dc35598c423777d63d8db7b5e3"
+      "digest": "10a6e26ae2c11c8cb34d6673760b70f81d6232478fc8cee9be925b7fa1ae8d52"
     },
     "semantics": "selected bit = claim admitted to synthesis candidate set",
     "authority": {
       "physicalQpuExecution": "UNKNOWN",
       "externalTruth": "UNKNOWN"
     },
-    "digest": "f0c042463eeac9b959ba4b8229e11ff9592d0679738a1e3bac9224db4e2b5c69"
+    "digest": "ff89372c81c2df250fb342701f05757f4974dd12bebeb9de956181dfdeec8fa5"
   },
   "parameters": {
     "gammas": [0.7, 1.1],
